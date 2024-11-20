@@ -37,7 +37,7 @@ const double eps = 1e-9;
 
 int n, res[N];
 vector<int> ar[N];
-map<int, int> f[N];
+vector<int> f[N];
 
 void Input(void) 
 {
@@ -53,24 +53,18 @@ void Input(void)
 
 void DFS(int u, int p)
 {
-    map<int, int> tmp;
     for (int v: ar[u])
         if (v != p)
         {
             DFS(v, u);
-            if (sz(f[v]) > sz(tmp)) swap(f[v], tmp);
-            for (auto x: f[v]) tmp[x.F] += x.S;
+            if (sz(f[v]) > sz(f[u])) swap(f[u], f[v]);
+            for (int i = 0; i < sz(f[v]); i ++) f[u][sz(f[u]) - sz(f[v]) + i] += f[v][i];
         }
-    f[u][0] = 1;
-    res[u] = 0;
-    int save = 1;
-    for (auto x: tmp) 
-    {
-        f[u][x.F + 1] = x.S;
-        if (x.S > save) save = x.S, res[u] = x.F + 1;
-        else 
-            if (x.S == save) res[u] = min(res[u], x.F + 1);
-    }
+    f[u].push_back(1);
+    res[u] = sz(f[u]) - 1;
+    for (int i = sz(f[u]) - 2; i >= 0; i --) 
+        if (f[u][res[u]] < f[u][i]) res[u] = i;
+    res[u] = sz(f[u]) - res[u] - 1;
 }
 
 void solve(void) 
