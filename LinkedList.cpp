@@ -8,49 +8,69 @@ struct Node
     Node *Next;
 };
 
-
-struct LinkedList
+struct linkedList
 {
     Node *Head;
     Node *Tail;
-    void Insert(int data)
+    void addBeforeX(int x, int y)
     {
         Node *newNode = new Node;
-        newNode->data = data;
+        newNode->data = y;
         newNode->Next = NULL;
-        if (Head == NULL)
+        Node *current = Head;
+        Node *prev = NULL;
+        while (current != NULL)
         {
-            Head = Tail = newNode;
-        }
-        else
-        {
-            Tail->Next = newNode;
-            Tail = newNode;
-        }
-    }
-    void insertAfterX(int x, int data)
-    {
-        Node *newNode = new Node;
-        newNode->data = data;
-        Node *p = Head;
-        while (p != NULL && p->data != x)
-        {
-            p = p->Next;
-        }
-        if (p == NULL)
-        {
-            cout << "Not found " << x << endl;
-        }
-        else
-        {
-            newNode->Next = p->Next;
-            p->Next = newNode;
+            if (current->data == x)
+            {
+                if (prev == NULL)
+                {
+                    newNode->Next = Head;
+                    Head = newNode;
+                }
+                else
+                {
+                    prev->Next = newNode;
+                    newNode->Next = current;
+                }
+                return;
+            }
+            prev = current;
+            current = current->Next;
         }
     }
 };
 
 int main()
 {
-    LinkedList List = {NULL, NULL};  
-    return ;    
+    linkedList *list = new linkedList;
+    list->Head = NULL;
+    list->Tail = NULL;
+    while(true)
+    {
+        int x;
+        cin >> x;
+        if (x == 0) break;
+        Node *newNode = new Node;
+        newNode->data = x;  
+        newNode->Next = NULL;
+        if (list->Head == NULL)
+        {
+            list->Head = newNode;
+            list->Tail = newNode;
+        }
+        else
+        {
+            list->Tail->Next = newNode;
+            list->Tail = newNode;
+        }
+    }
+    list->addBeforeX(7, 5);
+    Node *current = list->Head;
+    while (current != NULL)
+    {
+        cout << current->data << ' ';
+        current = current->Next;
+    }
+    return 0;    
 }
