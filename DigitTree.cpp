@@ -35,7 +35,7 @@ const int INF = 1e9 + 7;
 const ll oo = 2e18;
 const double eps = 1e-9;
 
-int n, Mo, pw[N];
+int n, Mo, pw[N], iv[N];
 vector<pair<int, int> > ar[N];
 
 int POW(int x, int y)
@@ -49,26 +49,104 @@ int POW(int x, int y)
 void Input(void) 
 {
     cin >> n >> Mo;
-    for (int i = 1; i <= n; i ++)
+    for (int i = 1; i < n; i ++)
     {
         int u, v, w;
         cin >> u >> v >> w;
+        u ++, v ++;
         ar[u].push_back({v, w});
         ar[v].push_back({u, w});
     }
-    pw[0] = 1;
-    for (int i = 1; i <= n; i ++) pw[i] = 1LL * pw[i - 1] * 10 % Mo;
-    for (int i = 1; i <= n; i ++) pw[i] = POW(pw[i], Mo - 2);
 }
 
-void centroid(int u, int p) 
+int subtree[N];
+bool used[N];
+
+int DFS(int u, int pa)
 {
-    
+    subtree[u] = 1;
+    for (auto v : ar[u])
+        if (v.F != pa && !used[v.F])
+            subtree[u] += DFS(v.F, u);
+    return subtree[u];
+}
+
+int findCentroid(int u, int p, int lim)
+{
+    for (auto v : ar[u])
+        if (v.F != p && !used[v.F] && subtree[v.F] > lim)
+            return findCentroid(v.F, u, lim);
+    return u;
+}
+
+map<int, int> cnt[2];
+long long ans = 0;
+
+void DFS2(int u, int p, int depth, int sumFromLeaf, int sumFromRoot, bool add)
+{
+    if (add) 
+    {
+        cnt[0][sumFromLeaf] ++;
+        cnt[1][1LL * (Mo - sumFromRoot) * iv[depth] % Mo] ++;   
+    }
+    else
+    {
+        ans += cnt[0][1LL * (Mo - sumFromRoot) * iv[depth] % Mo];
+        ans += cnt[1][sumFromLeaf];
+    }
+    for (auto v : ar[u])
+        if (v.F != p && !used[v.F])
+        {
+            int w = v.S;
+            int SumFromLeaf = (1LL * pw[depth] * w + sumFromLeaf) % Mo;
+            int SumFromRoot = (1LL * sumFromRoot * 10 + w) % Mo;
+            DFS2(v.F, u, depth + 1, SumFromLeaf, SumFromRoot, add);
+        }
+}
+
+void centroid(int u) 
+{
+    DFS(u, 0);
+    int c = findCentroid(u, 0, subtree[u] >> 1);
+    used[c] = 1;
+    cnt[0][0] = 1;
+    cnt[1][0] = 1;
+    for (auto v : ar[c])
+        if (!used[v.F])
+        {
+            int w = v.S;
+            DFS2(v.F, c, 1, w % Mo, w % Mo, 0);
+            DFS2(v.F, c, 1, w % Mo, w % Mo, 1);
+        }
+    cnt[0].clear();
+    cnt[1].clear();
+    for (auto v : ar[c])
+        if (!used[v.F])
+            centroid(v.F);
 }
 
 void solve(void) 
 {
-    centroid(1, 0);
+    if (Mo == 1)
+    {
+        cout << 1LL * n * (n - 1);
+        return;
+    }
+    int phi = Mo, x = Mo;
+    for (int i = 2; 1LL * i * i <= x; i ++)
+        if (x % i == 0)
+        {
+            phi -= phi / i;
+            while (x % i == 0) x /= i;
+        }
+    if (x > 1) phi -= phi / x;
+    
+    pw[0] = 1;
+    for (int i = 1; i <= n; i ++) pw[i] = 1LL * pw[i - 1] * 10 % Mo;
+    iv[n] = POW(pw[n], phi - 1);
+    for (int i = n; i >= 1; i --) iv[i - 1] = 1LL * iv[i] * 10 % Mo;
+    centroid(1);
+    cout << ans;
 }
 
 int main() {
