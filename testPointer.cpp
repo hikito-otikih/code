@@ -1,15 +1,11 @@
-#include <bits/stdc++.h>
+#include<iostream>
 
 using namespace std;
 
-void cre()
+int main() 
 {
-    int a = 5;
-    int *p = new int[a];
-}
-
-int main()
-{
-    cre();
+    int x = 1, y = 2;
+    int *a[] = {&x, &y};
+    cout << a[1];
     return 0;
 }
