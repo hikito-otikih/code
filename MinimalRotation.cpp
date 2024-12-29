@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
 
+#pragma GCC optimize("O3")
+#pragma GCC optimize("unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,popcnt,lzcnt")
+
 #define MASK(i) (1LL << (i))
 #define BIT(x, y) (((x) >> (y)) & 1)
 #define sz(v) ((ll) (v).size())
@@ -122,7 +126,7 @@ void solve(void)
 int main() {
     std::ios_base::sync_with_stdio(0); cin.tie(0);
     if (fopen(task ".INP", "r"))
-        freopen(task ".INP", "r", stdin),
+        freopen(task ".txt", "r", stdin),
             freopen(task ".OUT", "w", stdout);
     int test = 1;
 //    cin >> test;
