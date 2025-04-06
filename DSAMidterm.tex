@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}       % Required for Vietnamese
+
+\title{DSA}
+\author{Tôn Huỳnh Chí}
+\date{February 2025}
+
+\begin{document}
+\maketitle
+
+\section {Hashing}
+
+\textbf{Definition:} \textit{Hashing is the process of mapping a key to a address for storing and retrieving.}\\
+\textbf{Advantages:} \textit{Easy to implement.}\\
+\textbf{Disadvantages:} \textit{Collisions.}\\
+
+\textbf{Collision Handling:}
+
+\begin{itemize}
+    \item \textbf{Linear probing} \textit{Find the next empty slot.}
+        \begin{itemize}
+            \item \textbf{Advantages:} \textit{Easy to implement.}
+            \item \textbf{Disadvantages:} \textit{Clustering, approximate to O(N) in the worst case.}
+        \end{itemize}
+    \item \textbf{Chaining:} \textit{Insert at the end of the linked list.}
+        \begin{itemize}
+            \item \textbf{Advantages:} \textit{No clustering.}
+            \item \textbf{Disadvantages:} \textit{Extra space, hard to balance the size of linked-lists in hash table.}
+        \end{itemize}
+    \item \textbf{Quadratic probing:} \textit{Find the next empty slot by quadratic function.}
+        \begin{itemize}
+            \item \textbf{Advantages:} \textit{No clustering.}
+            \item \textbf{Disadvantages:} \textit{May not find empty slot, lead to infinite loop.}
+        \end{itemize}
+    \item \textbf{Double hashing:} \textit{Find the next empty slot by another hash function.}
+        \begin{itemize}
+            \item \textbf{Advantages:} \textit{No clustering.}
+            \item \textbf{Disadvantages:} \textit{Complex, need a large size hash table to work well.}
+        \end{itemize}
+\end{itemize}
+
+\section{Recursion}
+
+\textbf{Definition:} \textit{Recursion is repetition, a funtion will invokes itself.}\\
+\textbf{Advantages:} \textit{Easy to implement.}\\
+\textbf{Disadvantages:} \textit{When a function is called, a stack frame is push onto the stack, if recursion many times, lead to stack-over-flow.}\\
+
+
+\end{document}

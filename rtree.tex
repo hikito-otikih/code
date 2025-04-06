@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}       % Required for Vietnamese
+
+\usepackage{graphicx}
+\usepackage[paperheight=6in,
+   paperwidth=5in,
+   top=10mm,
+   bottom=20mm,
+   left=10mm,
+   right=10mm]{geometry}
+
+\title{DSA}
+\author{Tôn Huỳnh Chí}
+\date{February 2025}
+
+\begin{document}
+\maketitle
+
+\section{Introduction} 
+
+The R-tree was proposed by Guttman in 1984, and aimed at handling geometrical data, such as points, line segments, surfaces, volumes, and hypervolumes in high-dimensional spaces. \par
+R-trees are hierarchical data structures based on B+ trees \textit{(self-balancing tree data structure used in databases and file systems for efficient indexing and range searches)}. They are used for the dynamic organization of a set of d-dimensional geometric objects representing them by the minimum bounding d-dimensional rectangles \textit{(MBRs)}. Each node of the R-tree corresponds to the MBR that bounds its children. The leaves of the tree contain pointers to the database objects instead of pointers to children nodes.\par
+It must be noted that the MBRs that surround different nodes may overlap each other. Besides, an MBR can be included \textit{(in the geometrical sense)} in many nodes, but it can be associated to only one of them. This means that a spatial search may visit many nodes before confirming the existence of a given MBR. Also, it is easy to see that the representation of geometric objects through their MBRs may result in false alarms. To resolve false alarms, the candidate objects must be examined. For instance, Figure 1.1 illustrates the case where two polygons do not intersect each other, but their MBRs do. Therefore, the R-tree plays the role of a filtering mechanism to reduce the costly direct examination of geometric objects.
+
+
+\section{Structure}
+
+R-tree is height-balanced tree, similar to B-Tree, 
+
+\end{document}

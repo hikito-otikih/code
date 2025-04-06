@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}       % Required for Vietnamese
+
+\title{Cal 2}
+\author{Tôn Huỳnh Chí}
+\date{February 2025}
+ 
+\begin{document}
+
+\maketitle
+
+\section{Applications of integration}
+
+\textbf{Area between curve: } \[Area = \int_{a}^{b} \mid f(x) - g(x) \mid dx \]
+\textbf{Volume of a solid: } \[Volume = \int_{a}^{b} A(x) dx\] 
+\textit{A(x) is the cross-sectional area of the solid at x.}\\
+\textbf{Volume of f(x) rotated around y - axis: } 
+    \[Volume = \int_{a}^{b} 2 \pi x f(x) dx \]
+\textbf{Length of curve: } \[Length = \int_{a}^{b} \sqrt{1 + (f'(x))^2} dx \]
+\textbf{Average value of f(x): } \[f_{avg} = \frac{1}{b - a} \int_{a}^{b} f(x) dx \]
+\textbf{Calc center of mass: } 
+\textit{Split f(x) into many small pieces, each piece has $\Delta x$ and f(x*) is the height of that piece.}\
+\[My = \int_{a}^{b} \rho x f(x) dx \]
+$\rho \Delta x f(x)$ is the mass of that piece and $dx$ is approximately to $\Delta x$ when in integration. \\
+\[Mx = \int_{a}^{b} \rho f(x) \frac{1}{2}  f(x) dx \]
+\textbf{Center of mass: } \[(\frac{My}{M}, \frac{Mx}{M})\]\
+
+\textbf{Consumer surplus: } \[CS = \int_{0}^{Q} (D(p) - K) dp \]
+\textit{D(p) is the demand function, K = D(Q) is the cost of production.}\\
+
+\section{Polar coordinates}
+
+\[\cos \theta = \frac{x}{r}\]
+\[\sin \theta = \frac{y}{r}\]
+
+\[r^2 = x^2 + y^2\]
+\[\tan \theta = \frac{y}{x}\]
+\textit{Area in polar coordinates: } \[Area = \frac{1}{2} \int_{\alpha}^{\beta} r^2 d\theta\]
+\textit{Arc length in polar coordinates: } \[Length = \int_{\alpha}^{\beta} \sqrt{r^2 + (\frac{dr}{d\theta})^2} d\theta = \int_{\alpha}^{\beta} \sqrt{\frac{dx}{dt} ^ 2 + \frac{dy}{dt} ^ 2} d\theta\]
+
+\textit{Parabola: $x^2 = 4py$ or $y^2 = 4px$}\newline 
+\textit{Ellipse: $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ \newline
+or $\frac{y^2}{a^2} + \frac{x^2}{b^2} = 1$} \newline
+\textit{Hyperbola: $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$ \newline
+or $\frac{y^2}{a^2} - \frac{x^2}{b^2} = 1$}\newline 
+\textit{First case is horizontal, second case is vertical.}\newline
+\textit{Conic section in polar coordinates: $r = \frac{ed}{1 \pm e \cos \theta}$}\newline
+\textit{or $r = \frac{ed}{1 \pm e \sin \theta}$}\newline
+\textit{e is the eccentricity, d is the distance from the directrix to the focus. if conic section synmetric with x-axis, use cos, if synmetric with y-axis, use sin.
+if the curve is go to the opposite direction, use $+$ . Similarity, the directrix x (or y) = + d.} \newline
+\textit{Distance between two points in polar coordinates: } \[d = \sqrt{r_1^2 + r_2^2 - 2r_1r_2 \cos(\theta_1 - \theta_2)}\]
+\section{Differential equations}
+\textbf{Euler method: } \[y_{n+1} = y_n + h f(x_n, y_n)\]
+
+\end{document} 
